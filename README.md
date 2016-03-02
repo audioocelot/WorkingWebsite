@@ -4,3 +4,4 @@ Contributors:
 * Marcello Martins
 * Zoilo Mercedes
 * Joshua Thomas
+* Dale Winston
