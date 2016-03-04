@@ -1,0 +1,12 @@
+/* Main Stylesheet for site */
+
+
+/* Fix space between navbar and jumbotron*/
+.navbar {
+    margin-bottom: 0;
+}
+
+.jumbotron {
+    padding-top: 80px;
+    padding-bottom: 80px;
+}
