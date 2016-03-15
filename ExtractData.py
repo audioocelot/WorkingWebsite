@@ -57,5 +57,11 @@ def getData(filename):
     raw = {avgSpectralContrast, avgMelSpectro, np.mean(y_harmonic), np.mean(y_percussive), np.mean(mfcc),
            np.mean(mfcc_delta), np.mean(beat_mfcc_delta), np.mean(chromagram), np.mean(beat_chroma),
            np.mean(beat_features), avgEnergy, tuning}
-    # norm = [float(i)/sum(raw) for i in raw] # normalise numbers between -1 and 1
-    return raw
+
+    norm = [float(i) / sum(raw) for i in raw]  # normalise numbers between -1 and 1
+
+    data = {"avgSpectralContrast": norm[0], "avgMelSpectro": norm[1], "y_harmonic": norm[2], "y_percussive": norm[3],
+            "mfcc": norm[4], "mfcc_delta": norm[5], "beat_mfcc_delta": norm[6], "chromagram": norm[7],
+            "beat_chroma": norm[8], "beat_features": norm[9], "avgEnergy": norm[10], "tuning": norm[11]}
+
+    return data

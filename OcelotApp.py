@@ -22,7 +22,7 @@ def upload():
         filename = audio.save(request.files['audio'])
         url = audio.url(filename)  # URL of the uploaded file, need to save this in a database
         data = ExtractData.getData('uploads/audio/' + filename)
-        mongo.db.upload.insert(data)
+        mongo.db.extracted.insert(data)
         return jsonify({"success": True})
     return redirect('/')
 
