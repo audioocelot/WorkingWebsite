@@ -1,6 +1,6 @@
 /*
-    Capture the audio input through the browser
-    Uses recorder.js
+ Capture the audio input through the browser
+ Uses recorder.js
 
  */
 var audio_context;
@@ -20,10 +20,10 @@ function startRecording(button) {
     button.disabled = true;
     $('#isUploaded').text("");
     var i = 0;
-    var counter = setInterval(function() {
+    var counter = setInterval(function () {
         i++;
-        if(i < 100) {
-            $('.progress-bar').css('width', i+'%');
+        if (i < 100) {
+            $('.progress-bar').css('width', i + '%');
         } else {
 
             clearTimeout(counter);
@@ -61,12 +61,26 @@ function createDownloadLink() {
             data: data,
             contentType: false,
             processData: false,
-            success: function(data) {
+            success: function (data) {
                 console.log(data);
                 $('.progress-bar').css('width', '0%');
                 $("#isUploaded").text("Song is uploaded");
+
+                var url = data;
+                var li = document.createElement('li');
+                var au = document.createElement('audio');
+                var hf = document.createElement('a');
+
+                au.controls = true;
+                au.src = url;
+                hf.href = url;
+                //hf.download = new Date().toISOString() + '.wav';
+                hf.innerHTML = hf.download;
+                li.appendChild(au);
+                li.appendChild(hf);
+                $("#recordingsList").append(li)
             },
-            error: function(response) {
+            error: function (response) {
                 console.log(response);
             }
         });

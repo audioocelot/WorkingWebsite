@@ -25,7 +25,7 @@ def upload():
         # just for
         data = ExtractData.getData('uploads/audio/' + filename)
         # mongo.db.extracted.insert(data)
-        return jsonify({"success": data})
+        return url
     return redirect('/')
 
 
