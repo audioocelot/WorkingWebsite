@@ -22,8 +22,8 @@ function uploadAudioFile(event) {
             console.log(response);
             $('#fileIsUploaded').text('Audio file is uploaded')
         },
-        error: function () {
-            console.log('fail');
+        error: function (response) {
+            console.log(response);
         }
     })
 
