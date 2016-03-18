@@ -19,11 +19,7 @@ def upload():
     if request.method == 'POST' and 'audio' in request.files:
         filename = audio.save(request.files['audio'])
         url = audio.url(filename)  # URL of the uploaded file, need to save this in a database
-        # Create a template to show the audio clip and let the user play it so they know that it has been uploaded
-        # this will be a temporary feature
-        # acutally just used javascript to create an <audio> tag with the url as the src so they can play the file
-        # just for
-        data = ExtractData.getData('uploads/audio/' + filename)
+        # data = ExtractData.getData('uploads/audio/' + filename)
         # mongo.db.extracted.insert(data)
         return url
     return redirect('/')
