@@ -2,7 +2,7 @@ from flask import Flask
 from flask import render_template, request, redirect, url_for, flash, jsonify
 from flask.ext.uploads import UploadSet, AUDIO, configure_uploads
 
-# import ExtractData
+import ExtractData
 
 
 app = Flask(__name__)
@@ -23,9 +23,9 @@ def upload():
         # this will be a temporary feature
         # acutally just used javascript to create an <audio> tag with the url as the src so they can play the file
         # just for
-        # data = ExtractData.getData('uploads/audio/' + filename)
+        data = ExtractData.getData('uploads/audio/' + filename)
         # mongo.db.extracted.insert(data)
-        return jsonify({"success": True})
+        return jsonify({"success": data})
     return redirect('/')
 
 
