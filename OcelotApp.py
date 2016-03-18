@@ -1,7 +1,6 @@
 from flask import Flask
 from flask import render_template, request, redirect, url_for, flash, jsonify
 from flask.ext.uploads import UploadSet, AUDIO, configure_uploads
-# from flask.ext.pymongo import PyMongo
 
 # import ExtractData
 
