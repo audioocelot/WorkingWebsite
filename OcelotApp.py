@@ -23,7 +23,7 @@ def upload():
         # this will be a temporary feature
         # acutally just used javascript to create an <audio> tag with the url as the src so they can play the file
         # just for
-        data = ExtractData.getData('/uploads/audio/' + filename)
+        data = ExtractData.getData('uploads/audio/' + filename)
         # mongo.db.extracted.insert(data)
         return jsonify({"success": data})
     return redirect('/')
