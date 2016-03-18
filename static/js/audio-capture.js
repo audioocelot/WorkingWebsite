@@ -66,8 +66,8 @@ function createDownloadLink() {
                 $('.progress-bar').css('width', '0%');
                 $("#isUploaded").text("Song is uploaded");
             },
-            error: function() {
-                console.log('fail');
+            error: function(response) {
+                console.log(response);
             }
         });
     });
