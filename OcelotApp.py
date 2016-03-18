@@ -9,7 +9,7 @@ app = Flask(__name__)
 # mongo = PyMongo(app)
 
 app.config['MONGO_DBNAME'] = 'audio'
-app.config['UPLOADS_DEFAULT_DEST'] = 'uploads'
+app.config['UPLOADS_DEFAULT_DEST'] = app.root_path + '/uploads'
 audio = UploadSet('audio', AUDIO)
 configure_uploads(app, (audio,))
 
