@@ -28,25 +28,24 @@ def missRate(ary, target):
 def run():
 	# load data from storage
 	print("Loading Data from storage...")
-	DS = SupervisedDataSet.loadFromFile("DataSetComplete")
-	TrainDS, TestDS = DS.splitWithProportion(0.8)
-
+	DS = SupervisedDataSet.loadFromFile("Data/DSSuperNorm")
+	TrainDS, TestDS = DS.splitWithProportion(0.7)
 
 	# create network with 7 inputs, 15 neurons in hidden layer and 4 in output layer
 	# define that the range of inputs will be from -1 to 1 and there will be 
 	print("Setting up NN...")
-	net = nl.net.newff([[-1, 1]]*12, [30, 8])
+	net = nl.net.newff(nl.tool.minmax(TestDS['input']), [60, 8])
 
 	# train the NN
 	print("Training NN...")
-	err = net.train(TrainDS['input'], TrainDS['target'], show=10, epochs=100, goal=0.001)
+	err = net.train(TestDS['input'], TestDS['target'], show=5, epochs=100, goal=0.001)
 
 	# simulate the NN with the testing data
 	print("Simulating NN...")
-	ary = net.sim(TestDS['input'])
+	ary = net.sim(TrainDS['input'])
 
 	# Display the miss rate for the testing data
-	missRate(ary, TestDS['target'])
+	missRate(ary, TrainDS['target'])
 
 	# # save the NN for later use if needed
 	# save = raw_input("Would you like to save this NN? ").lower()

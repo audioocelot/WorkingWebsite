@@ -1,5 +1,5 @@
 # Created by Marcello Martins on Feb 14, 2016
-# Last modified on Feb 15, 2016
+# Last modified on Mar 23, 2016
 # Extract features/data from wav files and saves to SupervisedDataSet np array for testing
 
 # @file data.py
@@ -9,6 +9,7 @@ import librosa
 import os
 import numpy as np
 from pybrain.datasets import SupervisedDataSet
+from scipy.cluster.vq import whiten
 
 prefix = "../" #Please set prefix to where ever your music is located on your local.
 
@@ -22,8 +23,8 @@ def listdir_nohidden(path):
 	return redir
 
 # extract features/data from wav file and return as np.array
-def getData(filename):
-	print("Gretting data for{}".format(filename))
+def getData(filename, answers):
+	print("Gretting data for {}".format(filename))
 	hop_length = 256;
 
 	# Load the example clip
@@ -70,13 +71,17 @@ def getData(filename):
 
 	avgSpectralContrast = np.mean(librosa.feature.spectral_contrast(S=S, sr=sr))
 
-	raw = [ avgSpectralContrast, avgMelSpectro, np.mean(y_harmonic), np.mean(y_percussive), np.mean(mfcc), np.mean(mfcc_delta), np.mean(beat_mfcc_delta), np.mean(chromagram), np.mean(beat_chroma), np.mean(beat_features), avgEnergy, tuning]
-	norm = [float(i)/sum(raw) for i in raw] # normalise numbers between -1 and 1
-	return norm
+	raw = [ avgSpectralContrast, avgMelSpectro, np.mean(y_harmonic), np.mean(y_percussive), np.mean(mfcc), np.mean(mfcc_delta), np.mean(beat_mfcc_delta), np.mean(chromagram), np.mean(beat_chroma), np.mean(beat_features), avgEnergy, tuning, zeroCrossings, tempo]
+	#norm = [(float(i)-min(raw))/((max(raw)-min(raw))) for i in raw] # normalise numbers between -1 and 1
+	return np.array([raw,answers]).reshape((1,2))
 
 # create dataset for NN with 12 inputes and 4 outputs
-DS = SupervisedDataSet( 12, 8 )
+
+# DS = SupervisedDataSet(12, 8)
 # DS = SupervisedDataSet.loadFromFile("DataSet")
+answers = [[1,0,0,0,0,0,0,0],[0,1,0,0,0,0,0,0],[0,0,1,0,0,0,0,0],[0,0,0,1,0,0,0,0],[0,0,0,0,1,0,0,0],[0,0,0,0,0,1,0,0],[0,0,0,0,0,0,1,0],[0,0,0,0,0,0,0,1]]
+
+Data = np.array([]).reshape((0,2))
 
 # list of song names on my computer by genre
 hiphop = listdir_nohidden("{}Hiphop-Samples".format(prefix))
@@ -87,47 +92,64 @@ dance = listdir_nohidden("{}Dance-Samples".format(prefix))
 metal = listdir_nohidden("{}Metal-Samples".format(prefix))
 reggae = listdir_nohidden("{}Reggae-Samples".format(prefix))
 rock = listdir_nohidden("{}Rock-Samples".format(prefix))
+
 for song in hiphop:
 	try:
-		DS.appendLinked(getData("{}Hiphop-Samples/{}".format(prefix, song)), [1,0,0,0,0,0,0,0])
+		Data = np.vstack([Data, getData("{}Hiphop-Samples/{}".format(prefix,song), answers[0])])
 	except:
+		print("ERROR ON SONG {}".format(song))
 		pass
 for song in jazz:
 	try:
-		DS.appendLinked(getData("{}Jazz-Samples/{}".format(prefix, song)), [0,1,0,0,0,0,0,0])
+		Data = np.vstack([Data, getData("{}Jazz-Samples/{}".format(prefix,song), answers[1])])
 	except:
+		print("ERROR ON SONG {}".format(song))
 		pass
 for song in classical:
 	try:
-		DS.appendLinked(getData("{}Classical-Samples/{}".format(prefix, song)), [0,0,1,0,0,0,0,0])
+		Data = np.vstack([Data, getData("{}Classical-Samples/{}".format(prefix,song), answers[2])])
 	except:
+		print("ERROR ON SONG {}".format(song))
 		pass
 for song in country:
 	try:
-		DS.appendLinked(getData("{}Country-Samples/{}".format(prefix, song)), [0,0,0,1,0,0,0,0])
+		Data = np.vstack([Data, getData("{}Country-Samples/{}".format(prefix,song), answers[3])])
 	except:
+		print("ERROR ON SONG {}".format(song))
 		pass
 for song in dance:
 	try:
-		DS.appendLinked(getData("{}Dance-Samples/{}".format(prefix, song)), [0,0,0,0,1,0,0,0])
+		Data = np.vstack([Data, getData("{}Dance-Samples/{}".format(prefix,song), answers[4])])
 	except:
+		print("ERROR ON SONG {}".format(song))
 		pass
 for song in metal:
 	try:
-		DS.appendLinked(getData("{}Metal-Samples/{}".format(prefix, song)), [0,0,0,0,0,1,0,0])
+		Data = np.vstack([Data, getData("{}Metal-Samples/{}".format(prefix,song), answers[5])])
 	except:
+		print("ERROR ON SONG {}".format(song))
 		pass
 for song in reggae:
 	try:
-		DS.appendLinked(getData("{}Reggae-Samples/{}".format(prefix, song)), [0,0,0,0,0,0,1,0])
+		Data = np.vstack([Data, getData("{}Reggae-Samples/{}".format(prefix,song), answers[6])])
 	except:
+		print("ERROR ON SONG {}".format(song))
 		pass
 for song in rock:
 	try:
-		DS.appendLinked(getData("{}Rock-Samples/{}".format(prefix, song)), [0,0,0,0,0,0,0,1])
+		Data = np.vstack([Data, getData("{}Rock-Samples/{}".format(prefix,song), answers[7])])
 	except:
+		print("ERROR ON SONG {}".format(song))
 		pass
 
-print(DS)
+# np.save("CompleteRawDataSet.npy", Data)
 
-DS.saveToFile("DataSetComplete")
+
+# tdata = np.array([]).reshape(0,12)
+# for i in range(5):
+# 	tdata = np.vstack([tdata, Data[i][0]])
+# tdata = whiten(tdata)
+# print(tdata)
+# print(np.argmin(tdata, axis=0))
+
+#DS.saveToFile("DataSetComplete")
