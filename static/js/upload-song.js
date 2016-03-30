@@ -20,7 +20,7 @@ function uploadAudioFile(event) {
         processData: false,
         success: function (response) {
             console.log(response);
-            $('#fileIsUploaded').text('Audio file is uploaded')
+            $('#fileIsUploaded').text(response)
         },
         error: function (response) {
             console.log(response);
