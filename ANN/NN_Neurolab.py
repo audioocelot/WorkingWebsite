@@ -8,7 +8,6 @@ import numpy as np
 import neurolab as nl
 from pybrain.datasets import SupervisedDataSet 
 
-
 # function to quickly display the errors for testingData
 def missRate(ary, target):
 	right, wrong = 0 , 0
@@ -23,31 +22,53 @@ def missRate(ary, target):
 			right+=1
 		else:
 			wrong+=1
-	print("# right: {}, # wrong: {}".format(right, wrong))
+	print("--------------------RESULTS--------------------")
+	print("\t# right: {}, # wrong: {}".format(right, wrong))
+	print("\tError rate: {}".format(float(right)/(float(right)+float(wrong))))
+	print("----------------------END----------------------")
 
-def run():
+
+def run(layers, show, epochs):
 	# load data from storage
 	print("Loading Data from storage...")
 	DS = SupervisedDataSet.loadFromFile("Data/DSSuperNorm")
 	TrainDS, TestDS = DS.splitWithProportion(0.7)
 
+	for _, target in TrainDS:
+		for x in range(8):
+			if target[x] == 1:
+				target[x] = .9
+			else:
+				target[x] = .1
+
+	for _, target in TestDS:
+		for x in range(8):
+			if target[x] == 1:
+				target[x] = .9
+			else:
+				target[x] = .1
+
 	# create network with 7 inputs, 15 neurons in hidden layer and 4 in output layer
 	# define that the range of inputs will be from -1 to 1 and there will be 
 	print("Setting up NN...")
-	net = nl.net.newff(nl.tool.minmax(TestDS['input']), [60, 8])
+	net = nl.net.newff(nl.tool.minmax(TestDS['input']), layers)
+
+	net.layers[-1].transf = nl.trans.SoftMax()
+
 
 	# train the NN
 	print("Training NN...")
-	err = net.train(TestDS['input'], TestDS['target'], show=5, epochs=100, goal=0.001)
+	err = net.train(TestDS['input'], TestDS['target'], show=show, epochs=epochs, goal=0.000000000001)
 
-	# simulate the NN with the testing data
-	print("Simulating NN...")
+
 	ary = net.sim(TrainDS['input'])
 
-	# Display the miss rate for the testing data
-	missRate(ary, TrainDS['target'])
 
-	# # save the NN for later use if needed
+	# Display the miss rate for the testing data
+	return missRate(ary, TrainDS['target'])
+
+	# save the NN for later use if needed
+
 	# save = raw_input("Would you like to save this NN? ").lower()
 	# if save == 'y' or save == 'yes':
 	# 	name = raw_input("Please enter file name to save NN: ")
@@ -58,4 +79,11 @@ def run():
 	# 	else:
 	# 		print("NN.py Completed")
 
-run()
+run([11, 8], 5, 25)
+# bestrate = 0
+# for x in range(10)
+# 	net, rate = run([60, 8], 25, 500)
+# 	if rate > bestrate:
+# 		bestrate = rate
+# 		print("new best rate is: {}".format(rate))
+# 		net.save('best.net')

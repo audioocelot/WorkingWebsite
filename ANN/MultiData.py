@@ -74,7 +74,7 @@ def getData(filename, answers):
 
 	raw = [ avgSpectralContrast, avgMelSpectro, np.mean(y_harmonic), np.mean(y_percussive), np.mean(mfcc), np.mean(mfcc_delta), np.mean(beat_mfcc_delta), np.mean(chromagram), np.mean(beat_chroma), np.mean(beat_features), avgEnergy, tuning, zeroCrossings, tempo]
 	#norm = [(float(i)-min(raw))/((max(raw)-min(raw))) for i in raw] # normalise numbers between -1 and 1
-	return np.array([raw,answers]).reshape((1,2))
+	return np.array(raw.reshape((1,2))
 
 
 def gethiphop(Data,genre, prefix, answers, fileName):

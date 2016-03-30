@@ -16,6 +16,7 @@ from pylab import ion, ioff, figure, draw, contourf, clf, show, hold, plot
 from scipy import diag, arange, meshgrid, where
 from numpy.random import multivariate_normal
 from numpy import array_equal
+import pickle
 
 DSSuperRaw = SupervisedDataSet.loadFromFile("Data/DSSuperRaw")
 DSClassRaw = ClassificationDataSet.loadFromFile("Data/DSClassRaw")
@@ -26,7 +27,7 @@ DSClassWhiten = ClassificationDataSet.loadFromFile("Data/DSClassWhiten")
 DSSuperNorm = SupervisedDataSet.loadFromFile("Data/DSSuperNorm")
 DSClassNorm = ClassificationDataSet.loadFromFile("Data/DSClassNorm")
 
-layers = (14, 90, 8)
+layers = (14, 14, 8)
 
 net = buildNetwork(*layers, hiddenclass=TanhLayer, bias=True, outputbias=True, outclass=SoftmaxLayer, recurrent=True)
 
@@ -37,7 +38,7 @@ TrainDS, TestDS = DSSuperNorm.splitWithProportion(0.7)
 
 t = BackpropTrainer( net, dataset=TrainDS, learningrate = 0.01, momentum = 0.01, verbose=True, weightdecay=0.0)
 
-t.trainEpochs(10)
+t.trainEpochs(50)
 
 right, wrong = 0 , 0
 for inpt, target in TestDS:
@@ -52,14 +53,18 @@ for inpt, target in TestDS:
 		right+=1
 	else:
 		wrong+=1
-print("# right: {}, # wrong: {}".format(right, wrong))
 
-guess = net.activate(TestDS['input'][35])
-answer = TestDS['target'][35]
+print("{}".format(float(right)/float(right+wrong)))
 
-print("{} -> {}".format(guess, answer))
+fileObject = open('NN.pybrain.net', 'w')
 
+pickle.dump(net, fileObject)
 
+fileObject.close()
+
+# fileObject = open('NN.pybrain.net','r')
+
+# net = pickle.load(fileObject)
 
 ########## OLD NN CODE ##########################
 

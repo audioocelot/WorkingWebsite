@@ -56,7 +56,6 @@ np.save("Data/DataSetCompleteRaw.npy", Data)
 
 ######### BELOW IS A MESS OF CODE USED TO GET THE DATA WE HAVE TODAY ###############
 
-
 # wdata = np.array([]).reshape(0,14)
 # for data in DataSetCompleteWhitenClass:
 # 	wdata = np.vstack([wdata, data[0]])
