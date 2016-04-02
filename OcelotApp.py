@@ -1,25 +1,11 @@
 from flask import Flask
 from flask import render_template, request, redirect, url_for, flash, jsonify
 from flask.ext.uploads import UploadSet, AUDIO, configure_uploads
-from pybrain.tools.shortcuts import buildNetwork
 import pickle
 import subprocess
 import time
-from pybrain.structure import RecurrentNetwork, FeedForwardNetwork
-from pybrain.structure import LinearLayer, SigmoidLayer, TanhLayer
-from pybrain.structure import FullConnection
-from pybrain.datasets import SupervisedDataSet, ClassificationDataSet
-from pybrain.utilities import percentError
-from pybrain.tools.shortcuts import buildNetwork
-from pybrain.supervised.trainers import BackpropTrainer
-from pybrain.structure.modules import SoftmaxLayer, BiasUnit
-from pylab import ion, ioff, figure, draw, contourf, clf, show, hold, plot
-from scipy import diag, arange, meshgrid, where
-from numpy.random import multivariate_normal
-from numpy import array_equal
-import pickle
 
-import ExtractData
+import ExtractDataSingle
 
 
 app = Flask(__name__)
@@ -36,8 +22,8 @@ def upload():
         if filename.endswith('mp3'):
             filename = convert_mp3(filename)
         # url = audio.url(filename)  # URL of the uploaded file, need to save this in a database
-        data = ExtractData.getData(app.root_path + '/uploads/audio/' + filename)
-        network_file = open('nn', 'r')
+        data = ExtractDataSingle.extract(app.root_path + '/uploads/audio/' + filename)
+        network_file = open('NN', 'r')
         net = pickle.load(network_file)
         result = net.activate(data)
         network_file.close()

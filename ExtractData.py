@@ -55,7 +55,7 @@ def getData(filename):
            np.mean(mfcc_delta), np.mean(beat_mfcc_delta), np.mean(chromagram), np.mean(beat_chroma),
            np.mean(beat_features), avgEnergy, tuning, zeroCrossings, tempo]
     norm = [(float(i)-min(raw))/((max(raw)-min(raw))) for i in raw] # normalise numbers between -1 and 1
-    return norm
+    return raw
 
 # Old extraction with only 8 features
 # # extract features/data from wav file and return as np.array
