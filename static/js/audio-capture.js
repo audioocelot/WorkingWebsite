@@ -64,7 +64,7 @@ function createDownloadLink() {
             success: function (data) {
                 console.log(data);
                 $('.progress-bar').css('width', '0%');
-                $("#isUploaded").text("Song is uploaded");
+                $("#isUploaded").text(data);
 
                 var url = data;
                 var li = document.createElement('li');
