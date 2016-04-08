@@ -22,7 +22,7 @@ def upload():
         if filename.endswith('mp3'):
             filename = convert_mp3(filename)
         # url = audio.url(filename)  # URL of the uploaded file, need to save this in a database
-        data = ExtractDataSingle.extract(app.root_path + '/uploads/audio/' + filename)
+        data = ExtractDataSingle.getData(app.root_path + '/uploads/audio/' + filename)
         network_file = open('NN.pybrain.net', 'r')
         net = pickle.load(network_file)
         result = net.activate(data)

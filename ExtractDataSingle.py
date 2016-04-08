@@ -12,7 +12,7 @@ from scipy.cluster.vq import whiten
 # extract features/data from wav file and return as np.array
 def getData(filename):
     print("Gretting data for {}".format(filename))
-    hop_length = 256;
+    hop_length = 256
 
     # Load the example clip
     y, sr = librosa.load(filename)
@@ -58,21 +58,13 @@ def getData(filename):
 
     avgSpectralContrast = np.mean(librosa.feature.spectral_contrast(S=S, sr=sr))
 
-    raw = [avgSpectralContrast, avgMelSpectro, np.mean(y_harmonic), np.mean(y_percussive), np.mean(mfcc),
-           np.mean(mfcc_delta), np.mean(beat_mfcc_delta), np.mean(chromagram), np.mean(beat_chroma),
-           np.mean(beat_features), avgEnergy, tuning, zeroCrossings, tempo]
-    # norm = [(float(i)-min(raw))/((max(raw)-min(raw))) for i in raw] # normalise numbers between -1 and 1
-    return np.array([raw])
+    raw = [avgSpectralContrast, avgMelSpectro, np.mean(y_harmonic), np.mean(y_percussive), np.mean(mfcc), np.mean(mfcc_delta), np.mean(beat_mfcc_delta), np.mean(chromagram), np.mean(beat_chroma), np.mean(beat_features), avgEnergy, tuning, zeroCrossings, tempo]
 
-
-# Gets the data from whatever files name is passed in the command line,
-# Usage Example: Python ExtractDataSingle.py /Path/To/Test.wav
-# Just change this filename in the code to however the server gets the file
-def extract(filename):
-    wDataStack = np.load("ANN/Data/WhitenDataStack.npy")
-    data = getData(filename)
-    wDataStack = np.vstack([wDataStack, data])
-    wDataStack = whiten(wDataStack)
+    data = np.array([raw])
+    rDataStack = np.load("ANN/Data/RawDataStack.npy")
+    rDataStack = np.vstack([rDataStack, data])
+    np.save("ANN/Data/RawDataStack.npy", rDataStack)
+    wDataStack = whiten(rDataStack)
     np.save("ANN/Data/WhitenDataStack.npy", wDataStack)
     wmin = np.argmin(wDataStack, axis=0)
     wmax = np.argmax(wDataStack, axis=0)
