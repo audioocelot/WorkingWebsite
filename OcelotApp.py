@@ -6,7 +6,8 @@ import subprocess
 import time
 
 import ExtractDataSingle
-
+import logging
+from logging.handlers import RotatingFileHandler
 
 app = Flask(__name__)
 
@@ -58,6 +59,12 @@ def category_sorted(results):
     return result_tuples
 
 if __name__ == "__main__":
+    handler = RotatingFileHandler('foo.log', maxBytes=10000, backupCount=1)
+    handler.setLevel(logging.DEBUG)
+    app.logger.addHandler(handler)
+    log = logging.getLogger('werkzeug')
+    log.setLevel(logging.DEBUG)
+    log.addHandler(handler)
     app.secret_key = 'ocelot key'
     # Setting debug to True enables debug output. This line should be
     # removed before deploying a production app.
