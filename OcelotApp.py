@@ -5,7 +5,7 @@ import pickle
 import subprocess
 import time
 
-import ExtractDataSingle
+# import ExtractDataSingle
 import logging
 from logging.handlers import RotatingFileHandler
 
@@ -16,6 +16,7 @@ audio = UploadSet('audio', ('wav', 'mp3'))
 configure_uploads(app, (audio,))
 
 
+
 @app.route('/upload', methods=['GET', 'POST'])
 def upload():
     if request.method == 'POST' and 'audio' in request.files:
@@ -23,12 +24,12 @@ def upload():
         if filename.endswith('mp3'):
             filename = convert_mp3(filename)
         # url = audio.url(filename)  # URL of the uploaded file, need to save this in a database
-        data = ExtractDataSingle.getData(app.root_path + '/uploads/audio/' + filename)
-        network_file = open('NN.pybrain.net', 'r')
-        net = pickle.load(network_file)
-        result = net.activate(data)
-        network_file.close()
-        categories_sorted = category_sorted(result)
+        # data = ExtractDataSingle.getData(app.root_path + '/uploads/audio/' + filename)
+        # network_file = open('NN.pybrain.net', 'r')
+        # net = pickle.load(network_file)
+        # result = net.activate(data)
+        # network_file.close()
+        categories_sorted = category_sorted([.2, .1, .15, .05, .27, .0, .0 ,.23])
         return str(categories_sorted)
     return redirect('/')
 
