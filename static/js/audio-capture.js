@@ -61,24 +61,26 @@ function createDownloadLink() {
             data: data,
             contentType: false,
             processData: false,
-            success: function (data) {
-                console.log(data);
+            success: function (response) {
                 $('.progress-bar').css('width', '0%');
-                $("#isUploaded").text(data);
-
-                var url = data;
-                var li = document.createElement('li');
-                var au = document.createElement('audio');
-                var hf = document.createElement('a');
-
-                au.controls = true;
-                au.src = url;
-                hf.href = url;
-                //hf.download = new Date().toISOString() + '.wav';
-                hf.innerHTML = hf.download;
-                li.appendChild(au);
-                li.appendChild(hf);
-                $("#recordingsList").append(li)
+                console.log(response);
+                $('#isUploaded').text(response['genres'][0][0] + ", " + response['genres'][1][0]);
+                response['songs'].forEach(function (song, index) {
+                    $('#recordedPlaylist').append("<li>" + song['artist_name'] + " - " + song['title'] + "</li>");
+                });
+                //var url = data;
+                //var li = document.createElement('li');
+                //var au = document.createElement('audio');
+                //var hf = document.createElement('a');
+                //
+                //au.controls = true;
+                //au.src = url;
+                //hf.href = url;
+                ////hf.download = new Date().toISOString() + '.wav';
+                //hf.innerHTML = hf.download;
+                //li.appendChild(au);
+                //li.appendChild(hf);
+                //$("#recordingsList").append(li)
             },
             error: function (response) {
                 console.log(response);

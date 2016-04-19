@@ -20,7 +20,10 @@ function uploadAudioFile(event) {
         processData: false,
         success: function (response) {
             console.log(response);
-            $('#fileIsUploaded').text(response)
+            $('#fileIsUploaded').text(response['genres'][0] + ", " + response['genres'][1]);
+            response['songs'].forEach(function(song, index) {
+                $('#uploadedPlaylist').append("<li>" + song['artist_name'] + " - " + song['title'] + "</li>");
+            });
         },
         error: function (response) {
             console.log(response);
