@@ -47,7 +47,7 @@ def upload():
         response = get_playlist(genres)
         response['genres'] = genres
         d = ['rm', deleteMe]
-        # call(d)
+        call(d)
         return jsonify(response)
     return redirect('/')
 
