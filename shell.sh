@@ -1,0 +1,2 @@
+#!/bin/sh
+sudo -u www-data /home/ubuntu/openSMILE/inst/bin/SMILExtract -C /home/ubuntu/openSMILE/config/IS09_emotion.conf -I /home/ubuntu/OcelotApp/uploads/audio/test.wav -O /home/ubuntu/OcelotApp/Temp.csv
