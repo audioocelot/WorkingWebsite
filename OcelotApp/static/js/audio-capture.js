@@ -18,7 +18,7 @@ function startUserMedia(stream) {
 function startRecording(button) {
     recorder && recorder.record();
     button.disabled = true;
-    $('#isUploaded').text("");
+    $('#fileIsUploaded').text("");
     var i = 0;
     var counter = setInterval(function () {
         i++;
