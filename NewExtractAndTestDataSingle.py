@@ -55,7 +55,7 @@ if CHANGE_PTP:
 inptNorm = (inpt - MIN) / PTP
 
 net = NetworkReader.readFrom(
-    '/home/ubuntu/OcelotApp/NN.pybrain.net.384-50.xml'
+    '/home/ubuntu/OcelotApp/NN.pybrain.net.384-100.xml'
 )
 
 guess = net.activate(inptNorm)
