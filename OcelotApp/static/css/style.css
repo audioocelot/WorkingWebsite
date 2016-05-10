@@ -104,8 +104,8 @@ html , body {
 
 .jumbotron {
   background-color: #FFFFFF;
-  position: absolute; 
-  left: 30%; 
+  position: absolute;
+  left: 30%;
 }
 /* Jumbotron Images */
 #baseImg {
@@ -204,4 +204,8 @@ button {
       transform: scale(100);
       opacity: 0;
     }
+}
+
+.progress {
+    width: 75%;
 }
