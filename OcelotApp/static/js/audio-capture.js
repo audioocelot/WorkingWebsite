@@ -70,7 +70,7 @@ function createDownloadLink() {
             success: function (response) {
                 $('.progress-bar').css('width', '0%');
                 console.log(response);
-                $('#fileIsUploaded').text(response['genres'][0][0] + " : " + response['genres'][0][1]+"%, " + response['genres'][1][0] +" : "+ response['genres'][1][1] + "%, " + response['genres'][2][0] + " : " + response['genres'][2][1] + "%");
+                $('#isUploaded').text(response['genres'][0][0] + " : " + response['genres'][0][1]+"%, " + response['genres'][1][0] +" : "+ response['genres'][1][1] + "%, " + response['genres'][2][0] + " : " + response['genres'][2][1] + "%");
                 response['songs'].forEach(function (song, index) {
                     $('#recordedPlaylist').append("<li>" + song['artist_name'] + " - " + song['title'] + "</li>");
                 });
