@@ -1,6 +1,5 @@
 /* Main Stylesheet for site */
 
-
 /* Fix space between navbar and jumbotron*/
 .navbar {
     margin-bottom: 0;
@@ -11,12 +10,14 @@
     padding-bottom: 80px;
 }
 
-@import url(http://fonts.googleapis.com/css?family=Roboto);
+@font-face {
+  font-family: GeosansBold;
+  src: url(/static/font/GeosansBold.ttf);
+}
 
 html , body {
   width: 100%;
   height: 100%;
-  font-family: 'Roboto', sans-serif;
   font-size: 100%;
   margin: 0;
   padding: 0;
@@ -94,3 +95,112 @@ html , body {
 }
 
 .content { padding: 1.5em; }
+
+/* Fix space between navbar and jumbotron*/
+.navbar {
+    margin-bottom: 0;
+}
+
+.jumbotron {
+  background-color: #FFFFFF;
+  position: absolute; 
+  left: 30%; 
+}
+/* Jumbotron Images */
+#baseImg {
+  margin: 0 0 0 85px;
+}
+#fullImg {
+  display: none;
+  position: absolute;
+  margin: -316px 0 0 -129px;
+}
+/* Navigation Button Position */
+#buttonDiv {
+  display: none;
+  position: relative;
+  margin: 60px 0 0 -9%;
+}
+
+.container {
+  font-family: GeosansBold;
+  display: none;
+  position: absolute;
+  margin: 550px 0 0 25%;
+}
+
+#mar {
+  margin: -80px 0 0 460px;
+}
+#dale {
+  margin: -80px 0 0 460px;
+}
+#josh {
+  margin: -80px 0 0 460px;
+}
+#zoilo {
+  margin: -80px 0 0 460px;
+}
+
+p {
+  font-size: 30px;
+}
+
+h1 {
+  color: #FF9900;
+}
+
+button {
+    position: relative;
+    border: none;
+    outline:none;
+    cursor: pointer;
+    background: #FFFFFF;
+    color: black;
+    padding: 18px 60px;
+    border-radius: 2px;
+    font-family: GeosansBold;
+    font-size: 30px;
+}
+
+.fab {
+    border-radius: 50%;
+    margin:0;
+    padding: 20px;
+}
+
+.material {
+  position:relative;
+    color:white;
+    margin: 20px auto;
+    height:400px;
+    width:500px;
+  background:#f45673;
+  
+}
+
+.ripple {
+  overflow:hidden;
+}
+
+.ripple-effect {
+  position: absolute;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  background: #FF9900;
+    
+  animation: ripple-animation 2s;
+}
+
+
+@keyframes ripple-animation {
+    from {
+      transform: scale(1);
+      opacity: 0.4;
+    }
+    to {
+      transform: scale(100);
+      opacity: 0;
+    }
+}

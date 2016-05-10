@@ -11,22 +11,70 @@
       </div>
     </div>
     <div class="jumbotron">
-        <div class="container">
-            <h1>Welcome...</h1>
+        <div id="baseImg"> 
+            <img src="/static/img/Ocelot_Logo.png"/>
+        </div>
+        <div id="fullImg">
+            <img src="/static/img/audiocelot.png"/>
+        </div>
+        <div id="buttonDiv">
+            <button id="AUbutton" class="ripple"> about us </button>
+            <button id="Ubutton" class="ripple"> upload a song </button>
+            <button id="Rbutton" class="ripple"> record a clip </button>
         </div>
     </div>
-    <div class="container">
+
+    <div id="aboutUs" class="container">
+        <h1>The Project</h1><br>
+        <p> 
+            This project takes a machine learning approach to music recognition. <br>
+            We feed over 300 attributes from music files into a trained neural <br>
+            network which gives a genre percentage breakdown. We then suggest <br>
+            music based on the highest ranked genres. <br>
+        </p>
+        <h1>The Team</h1>
+        <img src="/static/img/marcello.jpg"/>
+        <div id="mar">
+            <p>
+            Marcello Martins <br>
+            Python/Backend Developer<br>
+            </p>
+        </div>
+        <img src="/static/img/dale.jpg"/>
+        <div id="dale"> 
+            <p>
+            Dale Winston <br>
+            Backend Developer <br>
+            </p>
+        </div>
+        <img src="/static/img/joshua.jpg" style="width: 40%; height:40%;"/>
+        <div id="josh">
+            <p>
+            Joshua Thomas <br>
+            Android Developer <br>
+            </p>
+        </div>
+        <img src="/static/img/zoilo.jpg" style="width: 40%; height:40%;"/>
+        <div id="zoilo"> 
+            <p>
+            Zoilo Mercedes <br>
+            Front End Developer <br>
+            </p>
+        </div>
+    </div>
+    <div id="upload" class="container">
         <div class="">
             <h3>Upload Song</h3>
             <form id="audio-upload" action="{{ url_for('upload') }}" method=POST enctype=multipart/form-data>
                 <input id="audio-file-input" type=file name="audio">
-                <button id="submit-audio-upload" type="submit">Upload</button>
+                <button id="submit-audio-upload" type="submit" class="ripple">Upload</button>
             </form>
             <h3 id="fileIsUploaded"></h3>
             <ul id="uploadedPlaylist">
-
             </ul>
         </div>
+    </div>
+    <div id="record" class="container">
         <div class="">
             <h3>Record 20 second music clip</h3>
             <button id="recordButton" onclick="startRecording(this);">record</button>
@@ -40,7 +88,7 @@
             </ul>
         </div>
     </div>
-    <div class="result-div">
+    <div id="result-div">
         <ul id="result-list">
 
         </ul>
@@ -50,4 +98,6 @@
     <script src="{{ url_for('static', filename='js/recorder.js') }}"></script>
     <script src="{{ url_for('static', filename='js/audio-capture.js') }}"></script>
     <script src="{{ url_for('static', filename='js/upload-song.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/jquery-2.2.0.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/page-handler.js') }}"></script>
 {% endblock %}
