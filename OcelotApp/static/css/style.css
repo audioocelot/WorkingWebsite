@@ -130,16 +130,7 @@ html , body {
   margin: 550px 0 0 25%;
 }
 
-#mar {
-  margin: -80px 0 0 460px;
-}
-#dale {
-  margin: -80px 0 0 460px;
-}
-#josh {
-  margin: -80px 0 0 460px;
-}
-#zoilo {
+.team {
   margin: -80px 0 0 460px;
 }
 
