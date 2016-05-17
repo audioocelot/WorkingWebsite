@@ -30,6 +30,7 @@ function submitResponseForm(event) {
     event.preventDefault();
 
     var formData =  {
+        'features': $('#features-input').val(),
         'correct' : $('input[name=optionsRadios]:checked', '#response-form').val(),
         'genre' : $('#genre-selector').val()
     };
