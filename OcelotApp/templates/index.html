@@ -103,11 +103,12 @@
                         <form id="audio-upload" action="{{ url_for('upload') }}" method=POST
                               enctype=multipart/form-data>
                             <input id="audio-file-input" type=file name="audio">
-                            <button id="submit-audio-upload" type="submit" class="ripple pull-right">Upload</button>
+                            <button id="submit-audio-upload" type="submit" class="ripple">Upload</button>
                         </form>
                         <h3 id="fileIsUploaded"></h3>
                         <ul id="uploadedPlaylist">
                         </ul>
+                        {% include 'response-form.html' %}
                     </div>
                 </div>
                 <div id="record" class="panel-container col-md-8">
@@ -118,6 +119,7 @@
                             <div class="progress-bar" style="width: 0%;">
                             </div>
                         </div>
+                        {% include 'response-form.html' %}
                         <h3 id="isUploaded"></h3>
                         <ul id="recordedPlaylist">
 
@@ -141,4 +143,5 @@
     <script src="{{ url_for('static', filename='js/upload-song.js') }}"></script>
     <script src="{{ url_for('static', filename='js/jquery-2.2.0.min.js') }}"></script>
     <script src="{{ url_for('static', filename='js/page-handler.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/response-form.js')  }}"></script>
 {% endblock %}

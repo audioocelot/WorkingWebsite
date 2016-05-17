@@ -26,6 +26,7 @@ function uploadAudioFile(event) {
         },
         success: function (response) {
             console.log(response);
+            $('#response-form').show();
             $('#fileIsUploaded').text(response['genres'][0][0] + " : " + response['genres'][0][1]+"%, " + response['genres'][1][0] +" : "+ response['genres'][1][1] + "%, " + response['genres'][2][0] + " : " + response['genres'][2][1] + "%");
             response['songs'].forEach(function(song, index) {
                 $('#uploadedPlaylist').append("<li>" + song['artist_name'] + " - " + song['title'] + "</li>");
