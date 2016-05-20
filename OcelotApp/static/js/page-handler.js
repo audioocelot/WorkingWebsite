@@ -42,22 +42,44 @@
 $(document).ready(function () {
     $('#over-logo').hide();
     $('#button-container').hide();
-    $('#over-logo').delay(1000).fadeIn(500);
-    $('#button-container').delay(2000).fadeIn(500);
+    $('#over-logo').delay(2000).fadeIn(500);
+    $('#button-container').delay(4000).fadeIn(1000);
 
-    console.log('ready');
     $('#about-button').click(function () {
-        console.log('clicked about');
+        document.getElementById('yesRadio-upload').checked=true;
+        document.getElementById('yesRadio-record').checked=true;
+        $('#select-genre-upload').hide();
+        $('#response-form-uplaod').hide();
+        $('#thanks-text-upload').hide();
+        $('#select-genre-record').hide();
+        $('#response-form-record').hide();
+        $('#thanks-text-record').hide();
         $('#upload').fadeOut(250);
         $('#record').fadeOut(250);
         $('#aboutUs').fadeIn(500);
     });
     $('#upload-button').click(function () {
+        document.getElementById('yesRadio-upload').checked=true;
+        document.getElementById('yesRadio-record').checked=true;
+        $('#select-genre-upload').hide();
+        $('#response-form-uplaod').hide();
+        $('#thanks-text-upload').hide();
+        $('#select-genre-record').hide();
+        $('#response-form-record').hide();
+        $('#thanks-text-record').hide();
         $('#record').fadeOut(250);
         $('#aboutUs').fadeOut(250);
         $('#upload').fadeIn(500);
     });
     $('#record-button').click(function () {
+        document.getElementById('yesRadio-upload').checked=true;
+        document.getElementById('yesRadio-record').checked=true;
+        $('#select-genre-upload').hide();
+        $('#response-form-uplaod').hide();
+        $('#thanks-text-upload').hide();
+        $('#select-genre-record').hide();
+        $('#response-form-record').hide();
+        $('#thanks-text-record').hide();
         $('#upload').fadeOut(250);
         $('#aboutUs').fadeOut(250);
         $('#record').fadeIn(500);

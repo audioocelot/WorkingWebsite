@@ -18,6 +18,14 @@ function startUserMedia(stream) {
 function startRecording(button) {
     recorder && recorder.record();
     button.disabled = true;
+    document.getElementById('yesRadio-upload').checked=true;
+    document.getElementById('yesRadio-record').checked=true;
+    $('#select-genre-upload').hide();
+    $('#response-form-uplaod').hide();
+    $('#thanks-text-upload').hide();
+    $('#select-genre-record').hide();
+    $('#response-form-record').hide();
+    $('#thanks-text-record').hide();
     $('#isUploaded').text("");
     var i = 0;
     var counter = setInterval(function () {
@@ -69,25 +77,35 @@ function createDownloadLink() {
             },
             success: function (response) {
                 $('.progress-bar').css('width', '0%');
-                console.log(response);
-                $('#response-form').show();
-                $('#fileIsUploaded').text(response['genres'][0][0] + " : " + response['genres'][0][1]+"%, " + response['genres'][1][0] +" : "+ response['genres'][1][1] + "%, " + response['genres'][2][0] + " : " + response['genres'][2][1] + "%");
+                $('#features-input-record').val(response['features']);
+                $('#features-genre-record').val(response['genres'][0][0]);
+                var genreObject=document.getElementById("genre-selector-record")
+                for (var i=0; i<genreObject.length; i++){
+                    if (genreObject.options[i].value == response['genres'][0][0]){
+                        if(deletedOption != ""){
+                            var opt = document.createElement('option');
+                            opt.value = deletedOption;
+                            opt.innerHTML = deletedOption.charAt(0).toUpperCase()+deletedOption.slice(1);
+                            genreObject.appendChild(opt);
+                            deletedOption = genreObject.options[i].value
+                            genreObject.remove(i);
+                        } else{
+                            deletedOption = genreObject.options[i].value;
+                            genreObject.remove(i);  
+                        }
+                    }
+                }
+                $('#response-form-record').show();
+                $('#isUploaded').text(response['genres'][0][0] + " : " + response['genres'][0][1]+"%, " + response['genres'][1][0] +" : "+ response['genres'][1][1] + "%, " + response['genres'][2][0] + " : " + response['genres'][2][1] + "%");
+                var ul = document.getElementById('recordedPlaylist');
+                if (ul){
+                    while (ul.firstChild) {
+                        ul.removeChild(ul.firstChild);
+                    }
+                }
                 response['songs'].forEach(function (song, index) {
                     $('#recordedPlaylist').append("<li>" + song['artist_name'] + " - " + song['title'] + "</li>");
                 });
-                //var url = data;
-                //var li = document.createElement('li');
-                //var au = document.createElement('audio');
-                //var hf = document.createElement('a');
-                //
-                //au.controls = true;
-                //au.src = url;
-                //hf.href = url;
-                ////hf.download = new Date().toISOString() + '.wav';
-                //hf.innerHTML = hf.download;
-                //li.appendChild(au);
-                //li.appendChild(hf);
-                //$("#recordingsList").append(li)
             },
             error: function (response) {
                 console.log(response);

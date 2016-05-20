@@ -23,6 +23,10 @@ configure_uploads(app, (audio,))
 
 en = pyen.Pyen("QV529CKKM503STIOH")
 
+client = pymongo.MongoClient()
+db = client.AudioOcelot
+mongoAudio = db.Music
+
 
 @app.route('/upload', methods=['GET', 'POST'])
 def upload():
@@ -46,10 +50,8 @@ def upload():
         )
         tmp = GetFeatures("/home/ubuntu/OcelotApp/Temp.csv")
         features = list(tmp)
-        print(features)
         output, err = p.communicate()
         genres = [x.split(':') for x in output.split(',')]
-        print(genres)
         response = get_playlist(genres)
         response['genres'] = genres
         response['features'] = features
@@ -63,6 +65,16 @@ def upload():
 def index():
     return render_template("index.html",
                            title="Home")
+
+
+@app.route('/response', methods=['POST'])
+def update():
+    if request.method == 'POST':
+        response = request.get_json(force=True)
+        mongoAudio.insert_one(response)
+        time.sleep(1)
+        return jsonify({'success': True, 'status': 200, 'ContentType': 'application/json'})
+    return redirect('/')
 
 
 def process_mp3(f):

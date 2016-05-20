@@ -108,7 +108,7 @@
                         <h3 id="fileIsUploaded"></h3>
                         <ul id="uploadedPlaylist">
                         </ul>
-                        {% include 'response-form.html' %}
+                        {% include 'response-form-upload.html' %}
                     </div>
                 </div>
                 <div id="record" class="panel-container col-md-8">
@@ -119,11 +119,10 @@
                             <div class="progress-bar" style="width: 0%;">
                             </div>
                         </div>
-                        {% include 'response-form.html' %}
                         <h3 id="isUploaded"></h3>
                         <ul id="recordedPlaylist">
-
                         </ul>
+                        {% include 'response-form-record.html' %}
                     </div>
                 </div>
                 <div id="result-div">
@@ -131,6 +130,10 @@
 
                     </ul>
                 </div>
+            </div>
+            <div id="wrapper">
+                <label id="labeltext" for="Gplay-Logo">Sign Up for our Alpha!</label>
+                <a href="https://play.google.com/apps/testing/com.audioocelot"><img src="/static/img/Gplay.svg" id="Gplay-Logo"/></a>
             </div>
         </div>
     </div>

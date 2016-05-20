@@ -1,2 +1,2 @@
 import OcelotApp
-OcelotApp.app.run()
+OcelotApp.app.run(debug=True)

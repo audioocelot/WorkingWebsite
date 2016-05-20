@@ -1,5 +1,23 @@
 /* Main Stylesheet for site */
 
+#Gplay-Logo {
+    width: 100%;
+    height: 100%;
+}
+
+#labeltext{
+    font-family: GeosansBold;
+    src: url(/static/font/GeosansBold.ttf);
+    font-size: 2.2em;
+}
+
+#wrapper {
+    max-width: 300px;
+    margin: auto;
+    margin-right: 39%;
+    padding-top: 5%;
+    text-align:center
+}
 
 @font-face {
     font-family: GeosansBold;
@@ -25,7 +43,7 @@
     opacity: 0.9;
     position: fixed;
     visibility: hidden;
-    z-index: 1;
+    z-index: 2;
 }
 
 .loader {
@@ -100,6 +118,7 @@
     animation-direction: reverse; /* thx @HugoGiraudel */
 }
 
+
 .logo-container {
     width: 910px;
     margin: 60px auto 0 auto;
@@ -135,6 +154,7 @@
 
 .panel-container {
     display: none;
+    width: 100%;
     margin: 0 40px;
 }
 
@@ -147,7 +167,11 @@ h1 {
 }
 
 .pad-left {
-    padding-left: 20px;
+    align-content: center;
+    padding-left: 5%;
+    padding-right: 7%;
+    margin auto;
+    width: 100%;
 }
 
 .profile-image {
@@ -157,12 +181,12 @@ h1 {
 }
 
 .profile-text {
-    font-size: 18px;
+    font-size: 2em;
 }
 
 .profile-text-div {
-    padding-left: 90px;
-    padding-top: 100px;
+    padding-left: 10%;
+    padding-top: 9%;
 }
 
 .profile {
