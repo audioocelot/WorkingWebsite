@@ -18,14 +18,10 @@ function startUserMedia(stream) {
 function startRecording(button) {
     recorder && recorder.record();
     button.disabled = true;
-    document.getElementById('yesRadio-upload').checked=true;
     document.getElementById('yesRadio-record').checked=true;
     $('#select-genre-upload').hide();
     $('#response-form-uplaod').hide();
     $('#thanks-text-upload').hide();
-    $('#select-genre-record').hide();
-    $('#response-form-record').hide();
-    $('#thanks-text-record').hide();
     $('#isUploaded').text("");
     var i = 0;
     var counter = setInterval(function () {

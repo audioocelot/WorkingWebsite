@@ -2,9 +2,7 @@
     Script to upload audio file with ajax,
  */
 $('#submit-audio-upload').on('click', function (event) {
-    for(y in document.getElementsByClassName('yesRadio')){
-        y.checked=true;
-    }
+    document.getElementById('yesRadio-upload').checked=true;
     $('#select-genre-upload').hide();
     $('#response-form-upload').hide();
     $('#thanks-text-upload').hide();
