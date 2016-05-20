@@ -2,97 +2,140 @@
 {% block content %}
     {# Content goes here #}
     <div class="loading">
-      <div class="loader">
-        <div class="dot dot1"></div>
-        <div class="dot dot2"></div>
-        <div class="dot dot3"></div>
-        <div class="dot dot4"></div>
-        <span>LOADING</span>
-      </div>
-    </div>
-    <div class="jumbotron">
-        <div id="baseImg"> 
-            <img src="/static/img/Ocelot_Logo.png"/>
-        </div>
-        <div id="fullImg">
-            <img src="/static/img/audiocelot.png"/>
-        </div>
-        <div id="buttonDiv">
-            <button id="AUbutton" class="ripple"> about us </button>
-            <button id="Ubutton" class="ripple"> upload a song </button>
-            <button id="Rbutton" class="ripple"> record a clip </button>
+        <div class="loader">
+            <div class="dot dot1"></div>
+            <div class="dot dot2"></div>
+            <div class="dot dot3"></div>
+            <div class="dot dot4"></div>
+            <span>LOADING</span>
         </div>
     </div>
+    <div class="container">
+        <div class="content">
+            <div class="col-md-12">
+                <div class="logo-container">
+                    <div class="logo" id="small-logo">
+                        <img id="under-logo" src="/static/img/Ocelot_Logo.png"/>
+                    </div>
+                    <div class="logo" id="large-logo">
+                        <img id="over-logo" src="/static/img/audiocelot.png"/>
+                    </div>
+                </div>
+                {# End Logo Container #}
+                <div class="row" id="button-container">
+                    <button id="about-button" class="ripple"> about us</button>
+                    <button id="upload-button" class="ripple"> upload a song</button>
+                    <button id="record-button" class="ripple"> record a clip</button>
+                </div>
+                {# End Button Div #}
+            </div>
+            <div class="col-md-12">
+                <div id="aboutUs" class="panel-container">
+                    <h1>The Project</h1><br>
+                    <div class="pad-left">
+                        <span class="medium-text">This project takes a machine learning approach to music recognition.
+                        We feed over 300 attributes from music files into a trained neural
+                        network which gives a genre percentage breakdown. We then suggest
+                        music based on the highest ranked genres.</span>
+                    </div>
 
-    <div id="aboutUs" class="container">
-        <h1>The Project</h1><br>
-        <p> 
-            This project takes a machine learning approach to music recognition. <br>
-            We feed over 300 attributes from music files into a trained neural <br>
-            network which gives a genre percentage breakdown. We then suggest <br>
-            music based on the highest ranked genres. <br>
-        </p>
-        <h1>The Team</h1>
-        <img src="/static/img/marcello.jpg"/>
-        <div id="mar">
-            <p>
-            Marcello Martins <br>
-            Python/Backend Developer<br>
-            </p>
-        </div>
-        <img src="/static/img/dale.jpg"/>
-        <div id="dale"> 
-            <p>
-            Dale Winston <br>
-            Backend Developer <br>
-            </p>
-        </div>
-        <img src="/static/img/joshua.jpg" style="width: 40%; height:40%;"/>
-        <div id="josh">
-            <p>
-            Joshua Thomas <br>
-            Android Developer <br>
-            </p>
-        </div>
-        <img src="/static/img/zoilo.jpg" style="width: 40%; height:40%;"/>
-        <div id="zoilo"> 
-            <p>
-            Zoilo Mercedes <br>
-            Front End Developer <br>
-            </p>
-        </div>
-    </div>
-    <div id="upload" class="container">
-        <div class="">
-            <h3>Upload Song</h3>
-            <form id="audio-upload" action="{{ url_for('upload') }}" method=POST enctype=multipart/form-data>
-                <input id="audio-file-input" type=file name="audio">
-                <button id="submit-audio-upload" type="submit" class="ripple">Upload</button>
-            </form>
-            <h3 id="fileIsUploaded"></h3>
-            <ul id="uploadedPlaylist">
-            </ul>
-        </div>
-    </div>
-    <div id="record" class="container">
-        <div class="">
-            <h3>Record 20 second music clip</h3>
-            <button id="recordButton" onclick="startRecording(this);">record</button>
-            <div class="progress progress-striped">
-                <div class="progress-bar" style="width: 0%;">
+                    <h1>The Team</h1>
+                    <div class="row profile">
+                        <div class="col-md-4">
+                            <img src="/static/img/marcello.jpg" class="img-circle profile-image"/>
+                        </div>
+                        <div class="col-md-6 profile-text-div">
+                            <span class="profile-text">
+                                Marcello Martins
+                            </span>
+                            <br>
+                            <span class="profile-text">
+                                Python + Backend Developer
+                            </span>
+                        </div>
+                    </div>
+                    <div class="row profile">
+                        <div class="col-md-4">
+                            <img src="/static/img/dale.jpg" class="img-circle profile-image"/>
+                        </div>
+                        <div class="col-md-6 profile-text-div">
+                            <span class="profile-text">
+                                Dale Winston
+                            </span>
+                            <br>
+                            <span class="profile-text">
+                                Backend Developer
+                            </span>
+                        </div>
+                    </div>
+                    <div class="row profile">
+                        <div class="col-md-4">
+                            <img src="/static/img/joshua.jpg" class="img-circle profile-image"/>
+                        </div>
+                        <div class="col-md-6 profile-text-div">
+                            <span class="profile-text">
+                                Joshua Thomas
+                            </span>
+                            <br>
+                            <span class="profile-text">
+                                Android Developer
+                            </span>
+                        </div>
+                    </div>
+                    <div class="row profile">
+                        <div class="col-md-4">
+                            <img src="/static/img/zoilo.jpg" class="img-circle profile-image"/>
+                        </div>
+                        <div class="col-md-6 profile-text-div">
+                            <span class="profile-text">
+                                Ziolo Mercedes
+                            </span>
+                            <br>
+                            <span class="profile-text">
+                                Front End Developer
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div id="upload" class="panel-container col-md-8">
+                    <div class="pad-left">
+                        <h3>Upload Song</h3>
+                        <form id="audio-upload" action="{{ url_for('upload') }}" method=POST
+                              enctype=multipart/form-data>
+                            <input id="audio-file-input" type=file name="audio">
+                            <button id="submit-audio-upload" type="submit" class="ripple">Upload</button>
+                        </form>
+                        <h3 id="fileIsUploaded"></h3>
+                        <ul id="uploadedPlaylist">
+                        </ul>
+                        {% include 'response-form.html' %}
+                    </div>
+                </div>
+                <div id="record" class="panel-container col-md-8">
+                    <div class="pad-left">
+                        <h3>Record 20 second music clip</h3>
+                        <button id="recordButton" onclick="startRecording(this);">record</button>
+                        <div class="progress progress-striped">
+                            <div class="progress-bar" style="width: 0%;">
+                            </div>
+                        </div>
+                        {% include 'response-form.html' %}
+                        <h3 id="isUploaded"></h3>
+                        <ul id="recordedPlaylist">
+
+                        </ul>
+                    </div>
+                </div>
+                <div id="result-div">
+                    <ul id="result-list">
+
+                    </ul>
                 </div>
             </div>
-            <h3 id="isUploaded"></h3>
-            <ul id="recordedPlaylist">
-
-            </ul>
         </div>
     </div>
-    <div id="result-div">
-        <ul id="result-list">
 
-        </ul>
-    </div>
+
 
     {# Page specific js files  #}
     <script src="{{ url_for('static', filename='js/recorder.js') }}"></script>
@@ -100,4 +143,5 @@
     <script src="{{ url_for('static', filename='js/upload-song.js') }}"></script>
     <script src="{{ url_for('static', filename='js/jquery-2.2.0.min.js') }}"></script>
     <script src="{{ url_for('static', filename='js/page-handler.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/response-form.js')  }}"></script>
 {% endblock %}
