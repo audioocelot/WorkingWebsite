@@ -18,13 +18,13 @@ $('#yesRadio-record').change(function() {
 $('#submit-response-form-upload').on('click', function(event) {
     if(document.getElementById('yesRadio-upload').checked){
         var formData = {
-            'features': $('#features-input-uplaod').val(),
+            'features': $('#features-input-upload').val(),
             'correct' : document.getElementById('yesRadio-upload').checked,
-            'genre' : $('#features-genre').val()
+            'genre' : $('#features-genre-upload').val()
         };
     } else {
         var formData = {
-            'features': $('#features-input').val(),
+            'features': $('#features-input-upload').val(),
             'correct' : document.getElementById('yesRadio-upload').checked,
             'genre' : $('#genre-selector-upload').val()
         };
