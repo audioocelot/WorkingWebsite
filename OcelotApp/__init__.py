@@ -14,9 +14,10 @@ import wave
 import contextlib
 from mutagen.mp3 import MP3
 import pymongo
+from flask_sslify import SSLify
 
 app = Flask(__name__)
-
+sslify = SSLify(app)
 app.config['UPLOADS_DEFAULT_DEST'] = app.root_path + '/uploads'
 audio = UploadSet('audio', ('wav', 'mp3', 'mp4'))
 configure_uploads(app, (audio,))
