@@ -13,11 +13,12 @@ import json
 import wave
 import contextlib
 from mutagen.mp3 import MP3
+import pymongo
 
 app = Flask(__name__)
 
 app.config['UPLOADS_DEFAULT_DEST'] = app.root_path + '/uploads'
-audio = UploadSet('audio', ('wav', 'mp3'))
+audio = UploadSet('audio', ('wav', 'mp3', 'mp4'))
 configure_uploads(app, (audio,))
 
 en = pyen.Pyen("QV529CKKM503STIOH")
@@ -30,6 +31,8 @@ def upload():
         deleteMe = app.root_path + '/uploads/audio/' + filename[:-3]+'wav'
         if filename.endswith('mp3'):
             filename = process_mp3(filename)
+        elif filename.endswith('mp4'):
+            filename = process_mp4(filename)
         else:
             filename = process_wav(filename)
         # URL of the uploaded file, need to save this in a database
@@ -41,11 +44,15 @@ def upload():
                 "{}".format(filename)
             ], stdin=PIPE, stdout=PIPE, stderr=PIPE
         )
+        tmp = GetFeatures("/home/ubuntu/OcelotApp/Temp.csv")
+        features = list(tmp)
+        print(features)
         output, err = p.communicate()
         genres = [x.split(':') for x in output.split(',')]
         print(genres)
         response = get_playlist(genres)
         response['genres'] = genres
+        response['features'] = features
         d = ['rm', deleteMe]
         call(d)
         return jsonify(response)
@@ -100,6 +107,19 @@ def process_wav(f):
         raise ValueError(
             'Song is too short, please make song at least 20 seconds'
         )
+
+def process_mp4(f):
+    prefix = 'uploads/audio/'
+    original = app.root_path + '/uploads/audio/' + f
+    temp = app.root_path + '/uploads/audio/' + 'temp.wav'
+    trimmed = app.root_path + '/uploads/audio/' + f[:-3]+'wav'
+    c = ['ffmpeg', '-y','-i', original, temp]
+    call(c)
+    t = ['sox', temp, trimmed, 'trim', '0', '20']
+    call(t)
+    d = ['rm', original]
+    call(d)
+    return f[:-3]+'wav'
 
 
 def GetFeatures(path):
