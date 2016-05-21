@@ -6,13 +6,6 @@ $('#submit-audio-upload').on('click', function (event) {
     $('#select-genre-upload').hide();
     $('#response-form-upload').hide();
     $('#thanks-text-upload').hide();
-    ga('send', {
-      hitType: 'event',
-      eventCategory: 'Button',
-      eventAction: 'Click',
-      eventLabel: 'Actions',
-      eventValue: 'Upload song'
-    });
     uploadAudioFile(event);
 });
 var deletedOption = "";

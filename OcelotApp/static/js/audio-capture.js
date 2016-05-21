@@ -22,13 +22,6 @@ function startRecording(button) {
     $('#select-genre-upload').hide();
     $('#response-form-uplaod').hide();
     $('#thanks-text-upload').hide();
-    ga('send', {
-      hitType: 'event',
-      eventCategory: 'Button',
-      eventAction: 'Click',
-      eventLabel: 'Actions',
-      eventValue: 'Record Song'
-    });
     $('#isUploaded').text("");
     var i = 0;
     var counter = setInterval(function () {

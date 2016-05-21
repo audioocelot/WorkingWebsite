@@ -77,13 +77,6 @@ $(document).ready(function () {
         $('#record').fadeOut(250);
         $('#aboutUs').fadeOut(250);
         $('#upload').fadeIn(500);
-        ga('send', {
-          hitType: 'event',
-          eventCategory: 'Button',
-          eventAction: 'Click',
-          eventLabel: 'Navigation',
-          eventValue: 'Upload Page'
-        });
     });
     $('#record-button').click(function () {
         document.getElementById('yesRadio-upload').checked=true;

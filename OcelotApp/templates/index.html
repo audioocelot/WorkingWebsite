@@ -23,9 +23,9 @@
                 </div>
                 {# End Logo Container #}
                 <div class="row" id="button-container">
-                    <button id="about-button" class="ripple"> about us</button>
-                    <button id="upload-button" class="ripple"> upload a song</button>
-                    <button id="record-button" class="ripple"> record a clip</button>
+                    <button id="about-button" class="ripple" onclick="ga('send', 'event', 'Button', 'Click', 'Navigation','About Page');">About us</button>
+                    <button id="upload-button" class="ripple" onclick="ga('send', 'event', 'Button', 'Click', 'Navigation','Upload Page');">Upload a song</button>
+                    <button id="record-button" class="ripple" onclick="ga('send', 'event', 'Button', 'Click', 'Navigation','Record Page');">Record a clip</button>
                 </div>
                 {# End Button Div #}
             </div>
@@ -103,7 +103,7 @@
                         <form id="audio-upload" action="{{ url_for('upload') }}" method=POST
                               enctype=multipart/form-data>
                             <input id="audio-file-input" type=file name="audio">
-                            <button id="submit-audio-upload" type="submit" class="ripple">Upload</button>
+                            <button id="submit-audio-upload" type="submit" class="ripple"  onclick="ga('send', 'event', 'Button', 'Click', 'Actions','Submit Upload Song');">Upload</button>
                         </form>
                         <h3 id="fileIsUploaded"></h3>
                         <ul id="uploadedPlaylist">
@@ -114,7 +114,7 @@
                 <div id="record" class="panel-container col-md-8">
                     <div class="pad-left">
                         <h3>Record 20 second music clip</h3>
-                        <button id="recordButton" onclick="startRecording(this);">record</button>
+                        <button id="recordButton" onclick="startRecording(this); ga('send', 'event', 'Button', 'Click', 'Actions','Submit Record song');">record</button>
                         <div class="progress progress-striped">
                             <div class="progress-bar" style="width: 0%;">
                             </div>
