@@ -10,7 +10,7 @@ $('#submit-audio-upload').on('click', function (event) {
       hitType: 'event',
       eventCategory: 'Button',
       eventAction: 'Click',
-      eventLabel: 'Actions'
+      eventLabel: 'Actions',
       eventValue: 'Upload song'
     });
     uploadAudioFile(event);

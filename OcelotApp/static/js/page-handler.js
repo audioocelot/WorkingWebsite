@@ -81,7 +81,7 @@ $(document).ready(function () {
           hitType: 'event',
           eventCategory: 'Button',
           eventAction: 'Click',
-          eventLabel: 'Navigation'
+          eventLabel: 'Navigation',
           eventValue: 'Upload Page'
         });
     });
@@ -101,7 +101,7 @@ $(document).ready(function () {
           hitType: 'event',
           eventCategory: 'Button',
           eventAction: 'Click',
-          eventLabel: 'Navigation'
+          eventLabel: 'Navigation',
           eventValue: 'Record Page'
         });
     });

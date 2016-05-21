@@ -20,7 +20,7 @@ $('#submit-response-form-upload').on('click', function(event) {
       hitType: 'event',
       eventCategory: 'Button',
       eventAction: 'Click',
-      eventLabel: 'Actions'
+      eventLabel: 'Actions',
       eventValue: 'Upload Response'
     });
     if(document.getElementById('yesRadio-upload').checked){
@@ -43,7 +43,7 @@ $('#submit-response-form-record').on('click', function(event) {
       hitType: 'event',
       eventCategory: 'Button',
       eventAction: 'Click',
-      eventLabel: 'Actions'
+      eventLabel: 'Actions',
       eventValue: 'Record Response'
     });
     if(document.getElementById('yesRadio-record').checked){

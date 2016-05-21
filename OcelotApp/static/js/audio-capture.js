@@ -26,7 +26,7 @@ function startRecording(button) {
       hitType: 'event',
       eventCategory: 'Button',
       eventAction: 'Click',
-      eventLabel: 'Actions'
+      eventLabel: 'Actions',
       eventValue: 'Record Song'
     });
     $('#isUploaded').text("");
