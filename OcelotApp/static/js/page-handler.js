@@ -61,7 +61,7 @@ $(document).ready(function () {
           hitType: 'event',
           eventCategory: 'Button',
           eventAction: 'Click',
-          eventLabel: 'Navigation'
+          eventLabel: 'Navigation',
           eventValue: 'About Page'
         });
     });
