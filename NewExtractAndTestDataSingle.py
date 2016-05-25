@@ -55,7 +55,7 @@ inpt = GetFeatures("/home/ubuntu/OcelotApp/Temp.csv")
 inptNorm = (inpt - MIN) / PTP
 
 net = NetworkReader.readFrom(
-    '/home/ubuntu/OcelotApp/NN.pybrain.net.384-250.xml'
+    '/home/ubuntu/OcelotApp/NN.pybrain.net.384-50.xml'
 )
 
 guess = net.activate(inptNorm)
