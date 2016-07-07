@@ -53,6 +53,7 @@ def upload():
         features = list(tmp)
         output, err = p.communicate()
         genres = [x.split(':') for x in output.split(',')]
+        print(genres)
         response = get_playlist(genres)
         response['genres'] = genres
         response['features'] = features
@@ -147,8 +148,9 @@ def GetFeatures(path):
 
 
 def get_playlist(categories):
-    return en.get('playlist/static', type='genre-radio', genre=[categories[0][0], categories[1][0]], results=10)
-
+    return {'song': 'song'}
+    # return en.get('playlist/static', type='genre-radio', genre=[categories[0][0], categories[1][0]], results=10)
+#
 if __name__ == "__main__":
     handler = RotatingFileHandler('foo.log', maxBytes=10000, backupCount=1)
     handler.setLevel(logging.DEBUG)

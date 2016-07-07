@@ -31,7 +31,7 @@ open("OcelotApp/Temp.csv", 'w').close()
 rd = os.system(
     "sudo openSMILE/inst/bin/SMILExtract "
     + "-C openSMILE/config/IS09_emotion.conf "
-    + "-I OcelotApp/OcelotApp/uploads/audio/{} ".format(sys.argv[1])
+    + "-I OcelotApp/uploads/audio/{} ".format(sys.argv[1])
     + "-O OcelotApp/Temp.csv")
 
 inpt = GetFeatures("OcelotApp/Temp.csv")
@@ -55,7 +55,7 @@ inpt = GetFeatures("OcelotApp/Temp.csv")
 inptNorm = (inpt - MIN) / PTP
 
 net = NetworkReader.readFrom(
-    'OcelotApp/NN.pybrain.net.384-50.xml'
+    'NN.pybrain.net.384-50.xml'
 )
 
 guess = net.activate(inptNorm)
