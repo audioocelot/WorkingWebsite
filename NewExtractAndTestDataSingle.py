@@ -23,18 +23,18 @@ def GetFeatures(path):
 genres = ["classical", "country", "electronic", "hip hop",
           "jazz", "metal", "reggae", "rock"]
 
-MIN = np.load("/home/ubuntu/OcelotApp/MIN.npy")
-MAX = np.load("/home/ubuntu/OcelotApp/MAX.npy")
-PTP = np.load("/home/ubuntu/OcelotApp/PTP.npy")
+MIN = np.load("MIN.npy")
+MAX = np.load("MAX.npy")
+PTP = np.load("PTP.npy")
 
-open("/home/ubuntu/OcelotApp/Temp.csv", 'w').close()
+open("OcelotApp/Temp.csv", 'w').close()
 rd = os.system(
-    "sudo /home/ubuntu/openSMILE/inst/bin/SMILExtract "
-    + "-C /home/ubuntu/openSMILE/config/IS09_emotion.conf "
-    + "-I /home/ubuntu/OcelotApp/OcelotApp/uploads/audio/{} ".format(sys.argv[1])
-    + "-O /home/ubuntu/OcelotApp/Temp.csv")
+    "sudo openSMILE/inst/bin/SMILExtract "
+    + "-C openSMILE/config/IS09_emotion.conf "
+    + "-I OcelotApp/OcelotApp/uploads/audio/{} ".format(sys.argv[1])
+    + "-O OcelotApp/Temp.csv")
 
-inpt = GetFeatures("/home/ubuntu/OcelotApp/Temp.csv")
+inpt = GetFeatures("OcelotApp/Temp.csv")
 
 # CHANGE_PTP = False
 # for x in range(len(inpt)):
@@ -55,7 +55,7 @@ inpt = GetFeatures("/home/ubuntu/OcelotApp/Temp.csv")
 inptNorm = (inpt - MIN) / PTP
 
 net = NetworkReader.readFrom(
-    '/home/ubuntu/OcelotApp/NN.pybrain.net.384-50.xml'
+    'OcelotApp/NN.pybrain.net.384-50.xml'
 )
 
 guess = net.activate(inptNorm)

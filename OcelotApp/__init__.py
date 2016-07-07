@@ -45,11 +45,11 @@ def upload():
         p = Popen(
             [
                 'python',
-                '/home/ubuntu/OcelotApp/NewExtractAndTestDataSingle.py',
+                'NewExtractAndTestDataSingle.py',
                 "{}".format(filename)
             ], stdin=PIPE, stdout=PIPE, stderr=PIPE
         )
-        tmp = GetFeatures("/home/ubuntu/OcelotApp/Temp.csv")
+        tmp = GetFeatures("OcelotApp/Temp.csv")
         features = list(tmp)
         output, err = p.communicate()
         genres = [x.split(':') for x in output.split(',')]
