@@ -12,7 +12,7 @@ import json
 isEC2Server = False
 pathPrefix = ""
 if isEC2Server:
-    pathPrefix = "/home/ubuntu/"
+    pathPrefix = "/home/ubuntu/OcelotApp/"
 
 
 def GetFeatures(path):
@@ -28,16 +28,17 @@ def GetFeatures(path):
 genres = ["classical", "country", "electronic", "hip hop",
           "jazz", "metal", "reggae", "rock"]
 
-MIN = np.load(pathPrefix + "OcelotApp/MIN.npy")
-MAX = np.load(pathPrefix + "OcelotApp/MAX.npy")
-PTP = np.load(pathPrefix + "OcelotApp/PTP.npy")
+MIN = np.load(pathPrefix + "MIN.npy")
+MAX = np.load(pathPrefix + "MAX.npy")
+PTP = np.load(pathPrefix + "PTP.npy")
 
 
 open(pathPrefix + "OcelotApp/Temp.csv", 'w').close()
 rd = os.system(
     "sudo " + pathPrefix + "openSMILE/inst/bin/SMILExtract "
     + "-C " + pathPrefix + "openSMILE/config/IS09_emotion.conf "
-    + "-I " + pathPrefix + "OcelotApp/OcelotApp/uploads/audio/{} ".format(sys.argv[1])
+    # This works here but not on server.  server:testing works but it is different
+    + "-I " + pathPrefix + "OcelotApp/uploads/audio/{} ".format(sys.argv[1])
     + "-O " + pathPrefix + "OcelotApp/Temp.csv")
 
 inpt = GetFeatures(pathPrefix + "OcelotApp/Temp.csv")
@@ -61,7 +62,7 @@ inpt = GetFeatures(pathPrefix + "OcelotApp/Temp.csv")
 inptNorm = (inpt - MIN) / PTP
 
 net = NetworkReader.readFrom(
-    pathPrefix + 'OcelotApp/NN.pybrain.net.384-50.xml'
+    pathPrefix + 'NN.pybrain.net.384-50.xml'
 )
 
 guess = net.activate(inptNorm)
