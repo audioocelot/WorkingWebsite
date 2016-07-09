@@ -73,6 +73,7 @@ function createDownloadLink() {
             },
             success: function (response) {
                 $('.progress-bar').css('width', '0%');
+                console.log(response)
                 $('#features-input-record').val(response['features']);
                 $('#features-genre-record').val(response['genres'][0][0]);
                 var genreObject=document.getElementById("genre-selector-record")
@@ -87,7 +88,7 @@ function createDownloadLink() {
                             genreObject.remove(i);
                         } else{
                             deletedOption = genreObject.options[i].value;
-                            genreObject.remove(i);  
+                            genreObject.remove(i);
                         }
                     }
                 }
@@ -99,9 +100,9 @@ function createDownloadLink() {
                         ul.removeChild(ul.firstChild);
                     }
                 }
-                response['songs'].forEach(function (song, index) {
-                    $('#recordedPlaylist').append("<li>" + song['artist_name'] + " - " + song['title'] + "</li>");
-                });
+                //response['songs'].forEach(function (song, index) {
+                //    $('#recordedPlaylist').append("<li>" + song['artist_name'] + " - " + song['title'] + "</li>");
+                //});
             },
             error: function (response) {
                 console.log(response);
