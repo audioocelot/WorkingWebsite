@@ -27,12 +27,11 @@ en = pyen.Pyen("QV529CKKM503STIOH")
 client = pymongo.MongoClient()
 db = client.AudioOcelot
 mongoAudio = db.Music
-server = False
 
-serverPath = ""
-
-if server:
-    serverPath = "/home/ubuntu/OcelotApp/"
+isEC2Server = False
+pathPrefix = ""
+if isEC2Server:
+    pathPrefix = "/home/ubuntu/"
 
 
 @app.route('/upload', methods=['GET', 'POST'])
@@ -51,15 +50,14 @@ def upload():
         p = Popen(
             [
                 'python',
-                serverPath + 'NewExtractAndTestDataSingle.py',
+                pathPrefix + 'OcelotApp/NewExtractAndTestDataSingle.py',
                 "{}".format(filename)
             ], stdin=PIPE, stdout=PIPE, stderr=PIPE
         )
-        tmp = GetFeatures(serverPath + "Temp.csv")
+        tmp = GetFeatures(pathPrefix + "OcelotApp/Temp.csv")
         features = list(tmp)
         output, err = p.communicate()
         genres = [x.split(':') for x in output.split(',')]
-        print(genres)
         response = get_playlist(genres)
         response['genres'] = genres
         response['features'] = features
@@ -154,9 +152,8 @@ def GetFeatures(path):
 
 
 def get_playlist(categories):
-    return {'song': 'song'}
-    # return en.get('playlist/static', type='genre-radio', genre=[categories[0][0], categories[1][0]], results=10)
-#
+    return en.get('playlist/static', type='genre-radio', genre=[categories[0][0], categories[1][0]], results=10)
+
 if __name__ == "__main__":
     handler = RotatingFileHandler('foo.log', maxBytes=10000, backupCount=1)
     handler.setLevel(logging.DEBUG)

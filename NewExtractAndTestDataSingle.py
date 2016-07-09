@@ -8,14 +8,11 @@ import sys
 from pybrain.tools.xml.networkwriter import NetworkWriter
 from pybrain.tools.xml.networkreader import NetworkReader
 import json
-from flask import Flask
 
-server = False
-
-serverPath = ""
-
-if server:
-    serverPath = "/home/ubuntu/OcelotApp/"
+isEC2Server = False
+pathPrefix = ""
+if isEC2Server:
+    pathPrefix = "/home/ubuntu/"
 
 
 def GetFeatures(path):
@@ -31,18 +28,19 @@ def GetFeatures(path):
 genres = ["classical", "country", "electronic", "hip hop",
           "jazz", "metal", "reggae", "rock"]
 
-MIN = np.load(serverPath + "MIN.npy")
-MAX = np.load(serverPath + "MAX.npy")
-PTP = np.load(serverPath + "PTP.npy")
+MIN = np.load(pathPrefix + "OcelotApp/MIN.npy")
+MAX = np.load(pathPrefix + "OcelotApp/MAX.npy")
+PTP = np.load(pathPrefix + "OcelotApp/PTP.npy")
 
-open(path + "Temp.csv", 'w').close()
+
+open(pathPrefix + "OcelotApp/Temp.csv", 'w').close()
 rd = os.system(
-    "sudo " + serverPath + "openSMILE/inst/bin/SMILExtract "
-    + "-C " + serverPath + "openSMILE/config/IS09_emotion.conf "
-    + "-I " + serverPath + "OcelotApp/uploads/audio/{} ".format(sys.argv[1])
-    + "-O " + serverPath + "Temp.csv")
+    "sudo " + pathPrefix + "openSMILE/inst/bin/SMILExtract "
+    + "-C " + pathPrefix + "openSMILE/config/IS09_emotion.conf "
+    + "-I " + pathPrefix + "OcelotApp/OcelotApp/uploads/audio/{} ".format(sys.argv[1])
+    + "-O " + pathPrefix + "OcelotApp/Temp.csv")
 
-inpt = GetFeatures(serverPath + "Temp.csv")
+inpt = GetFeatures(pathPrefix + "OcelotApp/Temp.csv")
 
 # CHANGE_PTP = False
 # for x in range(len(inpt)):
@@ -63,7 +61,7 @@ inpt = GetFeatures(serverPath + "Temp.csv")
 inptNorm = (inpt - MIN) / PTP
 
 net = NetworkReader.readFrom(
-    serverPath + 'NN.pybrain.net.384-50.xml'
+    pathPrefix + 'OcelotApp/NN.pybrain.net.384-50.xml'
 )
 
 guess = net.activate(inptNorm)
