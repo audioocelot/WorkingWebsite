@@ -9,7 +9,7 @@ from pybrain.tools.xml.networkwriter import NetworkWriter
 from pybrain.tools.xml.networkreader import NetworkReader
 import json
 
-isEC2Server = False
+isEC2Server = True
 pathPrefix = ""
 if isEC2Server:
     pathPrefix = "/home/ubuntu/OcelotApp/"
@@ -37,7 +37,6 @@ open(pathPrefix + "OcelotApp/Temp.csv", 'w').close()
 rd = os.system(
     "sudo " + pathPrefix + "openSMILE/inst/bin/SMILExtract "
     + "-C " + pathPrefix + "openSMILE/config/IS09_emotion.conf "
-    # This works here but not on server.  server:testing works but it is different
     + "-I " + pathPrefix + "OcelotApp/uploads/audio/{} ".format(sys.argv[1])
     + "-O " + pathPrefix + "OcelotApp/Temp.csv")
 

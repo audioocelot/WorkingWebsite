@@ -28,7 +28,7 @@ client = pymongo.MongoClient()
 db = client.AudioOcelot
 mongoAudio = db.Music
 
-isEC2Server = False
+isEC2Server = True
 pathPrefix = ""
 if isEC2Server:
     pathPrefix = "/home/ubuntu/OcelotApp/"

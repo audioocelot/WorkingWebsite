@@ -54,9 +54,9 @@ function uploadAudioFile(event) {
                     ul.removeChild(ul.firstChild);
                 }
             }
-            response['songs'].forEach(function(song, index) {
-                $('#uploadedPlaylist').append("<li>" + song['artist_name'] + " - " + song['title'] + "</li>");
-            });
+            //response['songs'].forEach(function(song, index) {
+            //    $('#uploadedPlaylist').append("<li>" + song['artist_name'] + " - " + song['title'] + "</li>");
+            //});
         },
         error: function (response) {
             console.log(response);
