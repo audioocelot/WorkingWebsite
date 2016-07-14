@@ -9,6 +9,11 @@ from pybrain.tools.xml.networkwriter import NetworkWriter
 from pybrain.tools.xml.networkreader import NetworkReader
 import json
 
+isEC2Server = True
+pathPrefix = ""
+if isEC2Server:
+    pathPrefix = "/home/ubuntu/OcelotApp/"
+
 
 def GetFeatures(path):
     with open(path,
@@ -23,18 +28,19 @@ def GetFeatures(path):
 genres = ["classical", "country", "electronic", "hip hop",
           "jazz", "metal", "reggae", "rock"]
 
-MIN = np.load("/home/ubuntu/OcelotApp/MIN.npy")
-MAX = np.load("/home/ubuntu/OcelotApp/MAX.npy")
-PTP = np.load("/home/ubuntu/OcelotApp/PTP.npy")
+MIN = np.load(pathPrefix + "MIN.npy")
+MAX = np.load(pathPrefix + "MAX.npy")
+PTP = np.load(pathPrefix + "PTP.npy")
 
-open("/home/ubuntu/OcelotApp/Temp.csv", 'w').close()
+
+open(pathPrefix + "OcelotApp/Temp.csv", 'w').close()
 rd = os.system(
-    "sudo /home/ubuntu/openSMILE/inst/bin/SMILExtract "
-    + "-C /home/ubuntu/openSMILE/config/IS09_emotion.conf "
-    + "-I /home/ubuntu/OcelotApp/OcelotApp/uploads/audio/{} ".format(sys.argv[1])
-    + "-O /home/ubuntu/OcelotApp/Temp.csv")
+    "sudo " + pathPrefix + "openSMILE/inst/bin/SMILExtract "
+    + "-C " + pathPrefix + "openSMILE/config/IS09_emotion.conf "
+    + "-I " + pathPrefix + "OcelotApp/uploads/audio/{} ".format(sys.argv[1])
+    + "-O " + pathPrefix + "OcelotApp/Temp.csv")
 
-inpt = GetFeatures("/home/ubuntu/OcelotApp/Temp.csv")
+inpt = GetFeatures(pathPrefix + "OcelotApp/Temp.csv")
 
 # CHANGE_PTP = False
 # for x in range(len(inpt)):
@@ -55,7 +61,7 @@ inpt = GetFeatures("/home/ubuntu/OcelotApp/Temp.csv")
 inptNorm = (inpt - MIN) / PTP
 
 net = NetworkReader.readFrom(
-    '/home/ubuntu/OcelotApp/NN.pybrain.net.384-50.xml'
+    pathPrefix + 'NN.pybrain.net.384-50.xml'
 )
 
 guess = net.activate(inptNorm)
